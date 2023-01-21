@@ -1,0 +1,18 @@
+{
+  "name": "webscrape",
+  "version": "1.0.0",
+  "description": "web scrape",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.2.2",
+    "cheerio": "^1.0.0-rc.12",
+    "fetch": "^1.1.0",
+    "node-fetch": "^3.3.0",
+    "request": "^2.88.2"
+  }
+}
