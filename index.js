@@ -239,12 +239,12 @@ async function monitor() {
     }
 
     if (lastProducts !== dictLinks) {
-        const extra = getExtraKeys(lastProducts,dictLinks)
+        const extra = getExtraKeys(dictLinks,lastProducts)
         console.log(extra)
 
 // Itération sur les clés du dictionnaire pour obtenir les liens finaux
         for (const key of extra) {
-            const links = lastProducts[key];
+            const links = dictLinks[key];
             const newLinks = [];
             for (let i = 0; i < links.length; i++) {
                 const finalUrl = await getFinalUrl(links[i]);
@@ -253,10 +253,11 @@ async function monitor() {
             dictLinks[key] = newLinks;
             await sleep(500)
             await checkForNewProduct(dictLinks[key])
-
         }
 
     }
+
+    console.log("next")
 
     await sleep(600000)
     await monitor()
