@@ -32,6 +32,10 @@ function getExtraKeys(dict1, dict2) {
     return extraKeys;
 }
 
+const containsKey = (dict,val)=>{
+    return val in dict;
+}
+
 const getLinks = async () => {
     const { data } = await axios.get(siteUrl);
     const $ = cheerio.load(data);
@@ -39,6 +43,7 @@ const getLinks = async () => {
     // Recherche des balises 'a'
     const links = $('a');
     let count = 0
+    let tempKey = []
 
     // Récupération des href des balises 'a'
     for(let i = 0; i < links.length; i++){
@@ -48,9 +53,12 @@ const getLinks = async () => {
         let fullUrl = ""
         // Ajout de l'href à l'URL de base
         if (href) {
-            if (href.startsWith("/index") && !href.includes("-page-") && href.includes("cd") && href !== "/index.php/cd-audio-vinyle-edition-collector-limitee" && count <11) {
-                fullUrl = baseUrl + href;
-                count++
+            if(tempKey.indexOf(href) === -1) {
+                if (href.startsWith("/index") && !href.includes("-page-") && href.includes("cd") && href !== "/index.php/cd-audio-vinyle-edition-collector-limitee" && count < 11) {
+                    fullUrl = baseUrl + href;
+                    tempKey.push(href)
+                    count++
+                }
             }
         }
         if(fullUrl) {
